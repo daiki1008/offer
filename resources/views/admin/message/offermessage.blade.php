@@ -9,8 +9,8 @@
 <div class="offer-form-wrap">
 
     <p class="offermessage">OFFERMESSAGE</p>
-    <div class="offer_text" name="offer_text">
-      {{ $userinfo['message'] }}
+    <div class="received_offer_text" name="offer_text">
+      <p class="message">{{ $userinfo['message'] }}</p>
     </div>
     <p class="tenpu">・添付ファイル</p>
 

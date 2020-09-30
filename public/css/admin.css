@@ -193,7 +193,7 @@ a {
 .profile-container {
   padding: 20px 0 30px 50px;
   border: 3px solid #555555;
-  border-radius: 100px 100px 5px 5px;
+  border-radius: 15px 15px 5px 5px;
 }
 
 .container-top-area {
@@ -332,10 +332,12 @@ a {
 .profile_gallary_head{
   width: 1000px;
   height: 30px;
+  margin-left: 15px;
 }
 .profile_gallary{
   width: 150px;
   height: 30px;
+  margin-left: 5px;
   float: left;
   color: #333333;
 }
@@ -689,6 +691,7 @@ a {
   height: 150px;
   margin: 10px auto;
   border: solid #555555 2px;
+  /* border-bottom: 10px solid #555555; */
   border-radius: 30px 3px 3px 30px;
   position: relative;
 }
@@ -870,6 +873,17 @@ textarea {
   text-align: initial;
   padding: 0;
   float: left;
+}
+
+.received_offer_text{
+  width: 700px;
+  height: 300px;
+  border: solid 1px #444444;
+  border-radius: 5px;
+  margin-left: 50px;
+  padding: 0;
+  float: left;
+  display: block;
 }
 
 .offer_text{

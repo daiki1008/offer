@@ -5,9 +5,9 @@
 
 @foreach($userinfos as $userinfo)
   @if($userinfo->check == "0")
-  <div class="profile-index" style="background-color:#FFF0F5;">
+  <div class="profile-index" style="background-color:#FFF5EE ;">
   @elseif($userinfo->check == "1")
-  <div class="profile-index" style="background-color:#FFFFF0;">
+  <div class="profile-index" style="background-color:#FFFFF0 ;">
   @endif
 
     <a href="  {{ action('Admin\ProfileController@offermessage',['id'=> $userinfo->id,'message'=> $userinfo->message]) }}  ">
