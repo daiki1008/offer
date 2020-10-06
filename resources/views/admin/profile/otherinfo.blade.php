@@ -6,7 +6,7 @@
 
    <div class="container-top-area">
        <div class="profile-image">
-       <img src="{{ asset(  'storage/'.$userinfo['profile_image_path']  ) }}">
+       <img src="{{ asset(  $userinfo['profile_image_path']  ) }}">
        </div>
 
 
@@ -50,7 +50,7 @@
 
      <div class="gallary_area">
        @foreach($images as $image)
-       <img class="gallary_image" src="{{ asset(  'storage/'.$image->image_path  ) }}" alt="{{  $image['id'] }}">
+       <img class="gallary_image" src="{{ asset(  $image['image_path']  ) }}" alt="{{  $image['id'] }}">
        @endforeach
      </div>
 

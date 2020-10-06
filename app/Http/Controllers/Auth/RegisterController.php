@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Storage;
 
 class RegisterController extends Controller
 {
@@ -73,9 +74,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // dd($data['tag']);
-        $path = $data['profile_image_path']->store('public/image');
-        $path2 = str_replace('public/', '', $path);
+        // dd($data['profile_image_path']);
+        // $path = $data['profile_image_path']->store('public/image');
+        // $path2 = str_replace('public/', '', $path);
+        $image = $data['profile_image_path'];
+        $path = Storage::disk('s3')->putFile('/',$image,'public');
+        // $path2 = str_replace('public/', '', $path);
+        // dd($path);
+
         $tag = implode(" ",$data['tag']);
 
         return User::create([
@@ -84,7 +90,7 @@ class RegisterController extends Controller
             'introduction' => $data['introduction'],
             'tag' => $tag,
             'yagou' => $data['yagou'],
-            'profile_image_path' => $path2,
+            'profile_image_path' => Storage::disk('s3')->url($path),
             'password' => Hash::make($data['password']),
         ]);
     }

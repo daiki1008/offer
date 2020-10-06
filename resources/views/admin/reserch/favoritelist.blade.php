@@ -14,7 +14,7 @@
   <div class="profile-index">
    <a href="  {{ action('Admin\ProfileController@otherinfo',['id'=> $userinfo->id]) }}  ">
 
-        <div class="index-image"><img src="{{ asset(  'storage/'.$user->profile_image_path  ) }}"></div>
+        <div class="index-image"><img src="{{ asset(  $user['profile_image_path']  ) }}"></div>
      <div class="profile-index-head">
         <div class="index-name">{{ $userinfo->name }}</div>
         <div class="index-tag">{{ $userinfo->tag }}</div>

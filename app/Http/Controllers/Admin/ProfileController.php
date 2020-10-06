@@ -10,6 +10,8 @@ use App\Favorite;
 use App\Message;
 use App\Offer;
 use Illuminate\Support\Facades\Auth;
+use Storage;
+use Log;
 
 class ProfileController extends Controller
 {
@@ -82,39 +84,44 @@ class ProfileController extends Controller
         return view('admin.gallary.edit',compact('user','images'));
       }
 
-      public function gallary_update(Request $request){
-          $id = Auth::user()->id;
-          $user = User::find($id);
-
-        if(isset($request['uplode_file'])){
-
-          $images = new Image;
-          $images->user_id = $id;
-          $images->comment = $request['comment'];
-          // dd($id);
-
-          $path = $request->file('uplode_file')->store('public/image');
-          $path2 = str_replace('public/', '', $path);
-          $images->image_path = $path2;
-          $images->save();
-          }
-
-        return redirect('admin/gallary/edit');
-        }
+      // public function gallary_update(Request $request){
+      //     $id = Auth::user()->id;
+      //     $user = User::find($id);
+      //
+      //   if(isset($request['uplode_file'])){
+      //
+      //     $images = new Image;
+      //     $images->user_id = $id;
+      //     $images->comment = $request['comment'];
+      //     // dd($id);
+      //
+      //     $path = Storage::disk('s3')->putFile('/',$form['uplode_file'],'public');
+      //     dd($path);
+      //     $path2 = str_replace('public/', '', $path);
+      //     // $images->image_path = $path2;
+      //     $images->image_path = Storage::disk('s3')->url($path);
+      //     $images->save();
+      //     }
+      //
+      //   return redirect('admin/gallary/edit');
+      //   }
 
         public function profileUpdate(Request $request){
           $id = Auth::user()->id;
           $user = User::find($id);
 
-          // dd($request->file);
           $user->name = $request->name;
           $user->introduction = $request->profileText;
 
           if($request->file !== 'undefined'){
-
-            $path = $request->file('file')->store('public/image');
-            $path2 = str_replace('public/', '', $path);
-            $user->profile_image_path = $path2;
+            // Log::debug($user['profile_image_path']);
+            // $path = $request->file('file')->store('public/image');
+            // $path2 = str_replace('public/', '', $path);
+            $image = $request['file'];
+            $path = Storage::disk('s3')->putFile('/',$image,'public');
+            // $path2 = str_replace('public/', '', $path);
+            $user->profile_image_path = Storage::disk('s3')->url($path);
+            // Log::debug($user['profile_image_path']);
 
             }
           $user->save();
@@ -126,7 +133,8 @@ class ProfileController extends Controller
         public function gallaryUpdate(Request $request){
           $id = Auth::user()->id;
 
-          // dd($request['file']);
+          // Log::debug(array($request['file']));
+
           // $fileNum = $request->id;
           if(isset($request['file'])){
 
@@ -135,10 +143,13 @@ class ProfileController extends Controller
             $images->comment = "0";
             // dd($id);
 
-            $path = $request->file('file')->store('public/image');
-            $path2 = str_replace('public/', '', $path);
-            // dd($path2);
-            $images->image_path = $path2;
+            // $path = $request->file('file')->store('public/image');
+            $image = $request['file'];
+            $path = Storage::disk('s3')->putFile('/',$image,'public');
+            // $path2 = str_replace('public/', '', $path);
+            // dd($path);
+            // $images->image_path = $path2;
+            $images->image_path = Storage::disk('s3')->url($path);
             $images->save();
             }
 

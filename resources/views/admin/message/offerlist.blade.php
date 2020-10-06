@@ -12,7 +12,7 @@
 
     <a href="  {{ action('Admin\ProfileController@offermessage',['id'=> $userinfo->id,'message'=> $userinfo->message]) }}  ">
 
-      <div class="index-image"><img src="{{ asset(  'storage/'.$userinfo->profile_image_path  ) }}"></div>
+      <div class="index-image"><img src="{{ asset(  $userinfo['profile_image_path']  ) }}"></div>
       <div class="profile-index-head">
           <div class="index-name">{{ $userinfo->name }}</div>
           <div class="index-tag">{{ $userinfo->tag }}</div>

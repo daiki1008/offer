@@ -6,7 +6,7 @@
 
    <div class="container-top-area">
        <div class="profile-image">
-       <img src="{{ asset(  'storage/'.$user['profile_image_path']  ) }}">
+       <img src="{{ $user['profile_image_path'] }}">
        </div>
 
        <div class="edit-btn"><a href="{{ action('Admin\ProfileController@gallary_edit')}}">MyPageを編集</a></div>
@@ -46,7 +46,7 @@
 
        <div class="gallary_area">
          @foreach($images as $image)
-         <img class="gallary_image" src="{{ asset(  'storage/'.$image->image_path  ) }}" alt="{{  $image['id'] }}">
+         <img class="gallary_image" src="{{ asset(  $image['image_path']  ) }}" alt="{{  $image['id'] }}">
          @endforeach
        </div>
 

@@ -4,7 +4,7 @@
   <div class="profileEdit-top-area">
 
       <div class="edit-profile-image">
-        <img id="edited-profile-image" src="{{ asset(  'storage/'.$user['profile_image_path']  ) }}">
+        <img id="edited-profile-image" src="{{ asset(  $user['profile_image_path']  ) }}">
       </div>
 
       <label for="profileImage_uplode" class="profileImage_uplode_label">
@@ -68,7 +68,7 @@
         <button class="delete-btn" value="{{  $image['id'] }}">
           <p class="delete">×</p>
         </button>
-        <img class="gallary_image" src="{{ asset(  'storage/'.$image->image_path  ) }}" alt="{{  $image['id'] }}">
+        <img class="gallary_image" src="{{ $image['image_path'] }}" alt="{{  $image['id'] }}">
       </span>
       @endforeach
     </div>
@@ -122,7 +122,7 @@ $(function(){
     form.append( "name", nameData );
     form.append( "profileText", profileText );
     form.append( "file", fileData );
-    alert('OK');
+    // alert('OK');
 
 
     $.ajax({
@@ -259,7 +259,7 @@ $(function(){
     for (var i=0;i<=fileArrayNum;i++){
     // form.append( "text", textData );
     form.append( "file", fileArray[i] );
-    alert(i);
+    alert(fileArray[i]);
 
 
     $.ajax({

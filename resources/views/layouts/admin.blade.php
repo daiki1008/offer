@@ -47,7 +47,7 @@
          <div class="side-menu-top">
 
             <div class="side-profile-image">
-              <img src="{{ asset(  'storage/'.$user['profile_image_path']  ) }}">
+              <img src="{{ $user['profile_image_path']  }}">
             </div>
 
             <div class="side-profile">
