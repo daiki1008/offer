@@ -128,7 +128,7 @@ $(function(){
     $.ajax({
 
         type: 'post',
-        url: 'offer/updateProfile',
+        url: '/updateProfile',
         data: form,
         processData : false,
         contentType : false,
