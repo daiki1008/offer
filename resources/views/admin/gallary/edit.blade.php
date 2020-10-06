@@ -4,7 +4,7 @@
   <div class="profileEdit-top-area">
 
       <div class="edit-profile-image">
-        <img id="edited-profile-image" src="{{ asset(  $user['profile_image_path']  ) }}">
+        <img id="edited-profile-image" src="{{ $user['profile_image_path']  ) }}">
       </div>
 
       <label for="profileImage_uplode" class="profileImage_uplode_label">
@@ -122,13 +122,13 @@ $(function(){
     form.append( "name", nameData );
     form.append( "profileText", profileText );
     form.append( "file", fileData );
-    // alert('OK');
+    alert('OK');
 
 
     $.ajax({
 
         type: 'post',
-        url: '/updateProfile',
+        url: 'offer/updateProfile',
         data: form,
         processData : false,
         contentType : false,
