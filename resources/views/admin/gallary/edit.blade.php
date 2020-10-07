@@ -184,10 +184,10 @@ $(function(){
     var fileListnum = fileList.length;
     // alert(fileListnum);
 
-    var image0 = $('#uplode_file_image1');
-    var image1 = $('#uplode_file_image2');
-    var image2 = $('#uplode_file_image3');
-    var image3 = $('#uplode_file_image4');
+    // var image0 = $('#uplode_file_image1');
+    // var image1 = $('#uplode_file_image2');
+    // var image2 = $('#uplode_file_image3');
+    // var image3 = $('#uplode_file_image4');
 
     for (var i=0; i<fileListnum; i++){
        var selecta = "image"+i;

@@ -112,8 +112,8 @@ class ProfileController extends Controller
 
           $user->name = $request->name;
           $user->introduction = $request->profileText;
-          Log::debug($request['file']);
-          
+          Log::debug($request);
+
           if($request->file !== 'undefined'){
             // Log::debug($user['profile_image_path']);
             // $path = $request->file('file')->store('public/image');
