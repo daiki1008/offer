@@ -112,7 +112,8 @@ class ProfileController extends Controller
 
           $user->name = $request->name;
           $user->introduction = $request->profileText;
-
+          Log::debug($request['file']);
+          
           if($request->file !== 'undefined'){
             // Log::debug($user['profile_image_path']);
             // $path = $request->file('file')->store('public/image');
@@ -121,7 +122,7 @@ class ProfileController extends Controller
             $path = Storage::disk('s3')->putFile('/',$image,'public');
             // $path2 = str_replace('public/', '', $path);
             $user->profile_image_path = Storage::disk('s3')->url($path);
-            // Log::debug($user['profile_image_path']);
+
 
             }
           $user->save();

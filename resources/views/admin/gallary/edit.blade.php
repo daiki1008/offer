@@ -122,7 +122,7 @@ $(function(){
     form.append( "name", nameData );
     form.append( "profileText", profileText );
     form.append( "file", fileData );
-    alert('OK');
+    console.log(form);
 
 
     $.ajax({
@@ -259,7 +259,7 @@ $(function(){
     for (var i=0;i<=fileArrayNum;i++){
     // form.append( "text", textData );
     form.append( "file", fileArray[i] );
-    alert(fileArray[i]);
+    console.log(fileArray[i]);
 
 
     $.ajax({
