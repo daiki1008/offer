@@ -263,7 +263,9 @@ $(function(){
 
 
     $.ajax({
-
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
         type: 'post',
         url: '/updateGallary',
         data: form,
