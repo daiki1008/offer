@@ -13,8 +13,8 @@
 
       <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
 
-      <link href="{{ 'css/app.css' }}" rel="stylesheet">
-      <link href="{{ 'css/admin.css' }}" rel="stylesheet">
+      <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+      <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
    </head>
 
    <body>
