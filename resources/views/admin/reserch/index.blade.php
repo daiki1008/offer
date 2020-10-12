@@ -39,7 +39,7 @@
           <div class="profile-index-head">
             <div class="index-name">{{ $profile['name'] }}</div>
             <div class="index-tag">{{ $profile['tag'] }}</div>
-            <div class="index-introduction">{{ $profile['introduction'] }}</div>
+            <div class="index-introduction"><p>{{ $profile['introduction'] }}</p></div>
           </div>
           <div class="profile-index-function">
             <div class="index-favorite-btn"><a href="#">Favorite</a></div>
