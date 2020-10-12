@@ -78,6 +78,17 @@
       </span>
       @endforeach
     </div>
+    <div class="page_area">
+      @if($page > 1)
+        <button class="index_prev_btn"><a href="  {{ action('Admin\ProfileController@gallary_edit',['page_id'=> $page-1]) }}  ">←prev</a></button>
+      @endif
+      <div class="index_page">
+        <p><?php echo $page ;?> / <?php echo $page_num ;?></p>
+      </div>
+      @if( $page < $page_num)
+        <button class="index_next_btn"><a href="  {{ action('Admin\ProfileController@gallary_edit',['page_id'=> $page+1]) }}  ">next→</a></button>
+      @endif
+    </div>
 
    <div class="gallary_modal_wrap">
      <div class="gallary_modal">

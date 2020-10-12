@@ -43,7 +43,6 @@
           </div>
           <div class="profile-index-function">
             <div class="index-favorite-btn"><a href="#">Favorite</a></div>
-            <div class="index-offer-btn"><a href="#">Offer</a></div>
           </div>
 
         </div>

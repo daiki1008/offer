@@ -192,45 +192,103 @@ class ProfileController extends Controller
 
 
 
-     public function edit(){
-         return view('admin.profile.edit');
-      }
-
-      public function update(){
-         return redirect('admin/profile/edit');
-      }
-
-
-
-      public function gallary_edit(){
+      public function gallary_edit(Request $request){
         $id = Auth::user()->id;
         $user = User::find($id);
-        $images = Image::where('user_id', 'like', $id)->get();
+        // $images = Image::where('user_id', 'like', $id)->get();
+        $images = array();
+        $images0 = Image::where('user_id', 'like', $id)->get();
 
-        return view('admin.gallary.edit',compact('user','images'));
+
+        // dd($favorite);
+        define('MAX','16');
+        $ArrayLength = count($images0);
+        $page_num = ceil($ArrayLength/MAX);
+
+
+
+        // dd($ArrayLength);
+        if( $ArrayLength == 0){
+          $page = 1;
+          $images = array();
+          $images0 = array();
+          // dd($userinfos);
+        }
+
+         if($ArrayLength <= MAX){
+            if(!isset($request['page_id'])){
+              $page=1;
+              for($i=0;$i<$ArrayLength;$i++){
+                $images[$i]['id'] = $images0[$i]->id;
+                $images[$i]['user_id'] = $images0[$i]->user_id;
+                $images[$i]['comment'] = $images0[$i]->comment;
+                $images[$i]['image_path'] = $images0[$i]->image_path;
+              }
+            }
+          }elseif($ArrayLength > MAX){
+              if(!isset($request['page_id']) ){
+                  $page=1;
+                  for($i=0;$i<MAX;$i++){
+                    $images[$i]['id'] = $images0[$i]->id;
+                    $images[$i]['user_id'] = $images0[$i]->user_id;
+                    $images[$i]['comment'] = $images0[$i]->comment;
+                    $images[$i]['image_path'] = $images0[$i]->image_path;
+                  }
+                }else{
+                  $page = $request['page_id'];
+                  $start_num = ($page-1)*MAX;
+                  $end_num = $start_num + MAX;
+                  $last_num = $ArrayLength-$start_num;
+                  if($last_num >= MAX){
+                    for($i=$start_num;$i<$end_num;$i++){
+                      $images[$i]['id'] = $images0[$i]->id;
+                      $images[$i]['user_id'] = $images0[$i]->user_id;
+                      $images[$i]['comment'] = $images0[$i]->comment;
+                      $images[$i]['image_path'] = $images0[$i]->image_path;
+                    }
+                  }else{
+                    for($i=$start_num;$i<$ArrayLength;$i++){
+                      $images[$i]['id'] = $images0[$i]->id;
+                      $images[$i]['user_id'] = $images0[$i]->user_id;
+                      $images[$i]['comment'] = $images0[$i]->comment;
+                      $images[$i]['image_path'] = $images0[$i]->image_path;
+                    }
+                  }
+                }
+            }
+            // dd($images0);
+
+            if($images == [] && $images0 !== []){
+              $ArrayLength2 = count($images0);
+              $page_num = ceil($ArrayLength/MAX);
+              // dd($page_num);
+              $page = $page_num;
+
+              $start_num = ($page-1)*MAX;
+              $end_num = $start_num + MAX;
+              $last_num = $ArrayLength-$start_num;
+
+              if($last_num >= MAX){
+                for($i=$start_num;$i<$end_num;$i++){
+                  $images[$i]['id'] = $images0[$i]->id;
+                  $images[$i]['user_id'] = $images0[$i]->user_id;
+                  $images[$i]['comment'] = $images0[$i]->comment;
+                  $images[$i]['image_path'] = $images0[$i]->image_path;
+                }
+              }else{
+                for($i=$start_num;$i<$ArrayLength;$i++){
+                  $images[$i]['id'] = $images0[$i]->id;
+                  $images[$i]['user_id'] = $images0[$i]->user_id;
+                  $images[$i]['comment'] = $images0[$i]->comment;
+                  $images[$i]['image_path'] = $images0[$i]->image_path;
+                }
+              }
+
+            }
+
+
+        return view('admin.gallary.edit',compact('user','images','page','page_num'));
       }
-
-      // public function gallary_update(Request $request){
-      //     $id = Auth::user()->id;
-      //     $user = User::find($id);
-      //
-      //   if(isset($request['uplode_file'])){
-      //
-      //     $images = new Image;
-      //     $images->user_id = $id;
-      //     $images->comment = $request['comment'];
-      //     // dd($id);
-      //
-      //     $path = Storage::disk('s3')->putFile('/',$form['uplode_file'],'public');
-      //     dd($path);
-      //     $path2 = str_replace('public/', '', $path);
-      //     // $images->image_path = $path2;
-      //     $images->image_path = Storage::disk('s3')->url($path);
-      //     $images->save();
-      //     }
-      //
-      //   return redirect('admin/gallary/edit');
-      //   }
 
         public function profileUpdate(Request $request){
           $id = Auth::user()->id;
@@ -632,7 +690,7 @@ class ProfileController extends Controller
          $userinfos = array_merge($userinfos1,$userinfos2);
 
 
-         
+
 
 
          return view('admin.message.offerlist',compact('user','userinfos'));
