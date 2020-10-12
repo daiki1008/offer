@@ -69,6 +69,7 @@
     </div>
 
     <div class="edit_gallary_area">
+
       @foreach($images as $image)
       <span class="gallary_div">
         <button class="delete-btn" value="{{  $image['id'] }}">
@@ -274,7 +275,7 @@ $(function(){
     var fileArrayNum =  $(fileArray).length;
     // alert(fileArrayNum);
 
-    for (var i=0;i<=fileArrayNum;i++){
+    for (var i=0;i<fileArrayNum;i++){
     // form.append( "text", textData );
     form.append( "file", fileArray[i] );
     console.log(fileArray[i]);
