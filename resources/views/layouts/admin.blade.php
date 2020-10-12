@@ -18,12 +18,14 @@
    </head>
 
    <body>
-     <header>
-     <div class="top-area">
-         <h1 class="logo">offer</h1>
-         <!-- <img src="{{ asset('image/Offerlogo.jpg') }}"> -->
-     </div>
+     <header class="header_area">
+         <div class="top-area">
+           <h1 class="logo">offer</h1>
+           <!-- <img src="{{ asset('image/Offerlogo.jpg') }}"> -->
+         </div>
      </header>
+
+     <div class="velt"></div>
 
      <div class="nav-bar-area">
        <ul class="nav-ber">
@@ -78,10 +80,8 @@
        </div>
 
     </main>
-
+    <footer class="footer-area">
+    </footer>
    </body>
 
-
-   <footer class="footer-area">
-   </footer>
 </html>

@@ -32,7 +32,7 @@ class LoginController extends Controller
     // RouteServiceProvider::HOME;
     public function logout(Request $request) {
       Auth::logout();
-      return redirect('/home');
+      return redirect('/');
       }
 
     /**

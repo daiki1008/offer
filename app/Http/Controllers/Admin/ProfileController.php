@@ -24,14 +24,70 @@ class ProfileController extends Controller
 
      }
 
-     public function info(){
+     public function info(Request $request){
         $id = Auth::user()->id;
         $user = User::find($id);
 
-        $images = Image::where('user_id', 'like', $id)->get();
-        // dd($check);
+        $images0 = Image::where('user_id', 'like', $id)->get();
 
-        return view('admin.profile.info',compact('user','images'));
+
+        // dd($favorite);
+        define('MAX','24');
+        $ArrayLength = count($images0);
+        $page_num = ceil($ArrayLength/MAX);
+
+        // dd($ArrayLength);
+        if( $ArrayLength == 0){
+          $page = 1;
+          $images = array();
+          $images0 = array();
+          // dd($userinfos);
+        }
+
+
+         if($ArrayLength <= MAX){
+            if(!isset($request['page_id'])){
+              $page=1;
+              for($i=0;$i<$ArrayLength;$i++){
+                $images[$i]['id'] = $images0[$i]->id;
+                $images[$i]['user_id'] = $images0[$i]->user_id;
+                $images[$i]['comment'] = $images0[$i]->comment;
+                $images[$i]['image_path'] = $images0[$i]->image_path;
+              }
+            }
+          }elseif($ArrayLength > MAX){
+              if(!isset($request['page_id'])){
+                  $page=1;
+                  for($i=0;$i<MAX;$i++){
+                    $images[$i]['id'] = $images0[$i]->id;
+                    $images[$i]['user_id'] = $images0[$i]->user_id;
+                    $images[$i]['comment'] = $images0[$i]->comment;
+                    $images[$i]['image_path'] = $images0[$i]->image_path;
+                  }
+                }else{
+                  $page = $request['page_id'];
+                  $start_num = ($page-1)*MAX;
+                  $end_num = $start_num + MAX;
+                  $last_num = $ArrayLength-$start_num;
+                  if($last_num >= MAX){
+                    for($i=$start_num;$i<$end_num;$i++){
+                      $images[$i]['id'] = $images0[$i]->id;
+                      $images[$i]['user_id'] = $images0[$i]->user_id;
+                      $images[$i]['comment'] = $images0[$i]->comment;
+                      $images[$i]['image_path'] = $images0[$i]->image_path;
+                    }
+                  }else{
+                    for($i=$start_num;$i<$ArrayLength;$i++){
+                      $images[$i]['id'] = $images0[$i]->id;
+                      $images[$i]['user_id'] = $images0[$i]->user_id;
+                      $images[$i]['comment'] = $images0[$i]->comment;
+                      $images[$i]['image_path'] = $images0[$i]->image_path;
+                    }
+                  }
+                }
+            }
+
+        return view('admin.profile.info',compact('user','images','page','page_num'));
       }
 
 
@@ -39,10 +95,20 @@ class ProfileController extends Controller
       public function otherinfo(Request $request){
         $id = Auth::user()->id;
         $user = User::find($id);
+
+
+        if(isset($request['userinfo_id'])){
+        // dd($request['userinfo_id']);
+        $userinfo = User::find($request['userinfo_id']);
+        $images0 = Image::where('user_id', 'like', $request['userinfo_id'])->get();
+      }else{
         $userinfo = User::find($request->id);
+        $images0 = Image::where('user_id', 'like', $request->id)->get();
+
+      }
 
 
-        $favorite = Favorite::where('favorite_user_id',$id)->where('favorited_user_id',$userinfo->id)->get();
+        $favorite = Favorite::where('favorite_user_id',$id)->where('favorited_user_id',$userinfo['id'])->get();
 
          // dd(isset($favorite[0]));
 
@@ -51,17 +117,77 @@ class ProfileController extends Controller
       }else{
         $favorite = new Favorite;
         $favorite->favorite_user_id = $id;
-        $favorite->favorited_user_id = $userinfo->id;
+        $favorite->favorited_user_id = $userinfo['id'];
         $favorite->status = "0";
         $favorite->save();
       }
           // dd(isset($favorite));
         // dd($favorite->status);
 
-        $images = Image::where('user_id', 'like', $request->id)->get();
+        // $images = Image::where('user_id', 'like', $request->id)->get();
         // dd($user);
 
-        return view('admin.profile.otherinfo',compact('user','userinfo','images','favorite'));
+
+
+
+        // dd($favorite);
+        define('MAX','24');
+        $ArrayLength = count($images0);
+        $page_num = ceil($ArrayLength/MAX);
+
+        // dd($ArrayLength);
+        if( $ArrayLength == 0){
+          $page = 1;
+          $images = array();
+          $images0 = array();
+          // dd($userinfos);
+        }
+
+
+         if($ArrayLength <= MAX){
+            if(!isset($request['page_id'])){
+              $page=1;
+              for($i=0;$i<$ArrayLength;$i++){
+                $images[$i]['id'] = $images0[$i]->id;
+                $images[$i]['user_id'] = $images0[$i]->user_id;
+                $images[$i]['comment'] = $images0[$i]->comment;
+                $images[$i]['image_path'] = $images0[$i]->image_path;
+              }
+            }
+          }elseif($ArrayLength > MAX){
+              if(!isset($request['page_id'])){
+                  $page=1;
+                  for($i=0;$i<MAX;$i++){
+                    $images[$i]['id'] = $images0[$i]->id;
+                    $images[$i]['user_id'] = $images0[$i]->user_id;
+                    $images[$i]['comment'] = $images0[$i]->comment;
+                    $images[$i]['image_path'] = $images0[$i]->image_path;
+                  }
+                }else{
+                  $page = $request['page_id'];
+                  $start_num = ($page-1)*MAX;
+                  $end_num = $start_num + MAX;
+                  $last_num = $ArrayLength-$start_num;
+                  if($last_num >= MAX){
+                    for($i=$start_num;$i<$end_num;$i++){
+                      $images[$i]['id'] = $images0[$i]->id;
+                      $images[$i]['user_id'] = $images0[$i]->user_id;
+                      $images[$i]['comment'] = $images0[$i]->comment;
+                      $images[$i]['image_path'] = $images0[$i]->image_path;
+                    }
+                  }else{
+                    for($i=$start_num;$i<$ArrayLength;$i++){
+                      $images[$i]['id'] = $images0[$i]->id;
+                      $images[$i]['user_id'] = $images0[$i]->user_id;
+                      $images[$i]['comment'] = $images0[$i]->comment;
+                      $images[$i]['image_path'] = $images0[$i]->image_path;
+                    }
+                  }
+                }
+            }
+
+
+        return view('admin.profile.otherinfo',compact('user','userinfo','images','favorite','page','page_num'));
       }
 
 
@@ -168,77 +294,254 @@ class ProfileController extends Controller
           return true;
         }
 
-      public function favoritelist(){
+      public function favoritelist(Request $request){
         $id = Auth::user()->id;
         $user = User::find($id);
 
 
         $favorites = Favorite::where('favorite_user_id',$id)->where('status','1')->get();
         // dd($favorite);
+        define('MAX','8');
         $ArrayLength = count($favorites);
+        $page_num = ceil($ArrayLength/MAX);
+
         // dd($ArrayLength);
         if( $ArrayLength == 0){
+          $page = 1;
           $userinfos = array();
           // dd($userinfos);
         }else{
+          for($i=0;$i<$ArrayLength;$i++){
+              $favoritedUserId = $favorites[$i]->favorited_user_id;
+              $userinfos0[$i] = User::where('id',$favoritedUserId)->first();
+              $userinfos0[$i]['status'] = $favorites[$i]->status;
+            }
+         }
 
-        for($i=0;$i<$ArrayLength;$i++){
-            $favoritedUserId = $favorites[$i]->favorited_user_id;
-            $userinfos[$i] = User::where('id',$favoritedUserId)->first();
-            $userinfos[$i]['status'] = $favorites[$i]->status;
-        }
-      }
+
+         if($ArrayLength <= MAX){
+            if(!isset($request['page_id'])){
+              $page=1;
+              for($i=0;$i<$ArrayLength;$i++){
+                // $favoritedUserId = $favorites[$i]->favorited_user_id;
+                $userinfos[$i] = $userinfos0[$i];
+                $userinfos[$i]['status'] = $userinfos0[$i]['status'];
+              }
+            }
+          }elseif($ArrayLength > MAX){
+              if(!isset($request['page_id'])){
+                  $page=1;
+                  for($i=0;$i<MAX;$i++){
+                  // $favoritedUserId = $favorites[$i]->favorited_user_id;
+                  $userinfos[$i] = $userinfos0[$i];
+                  $userinfos[$i]['status'] = $userinfos0[$i]['status'];
+                  }
+                }else{
+                  $page = $request['page_id'];
+                  $start_num = ($page-1)*MAX;
+                  $end_num = $start_num + MAX;
+                  $last_num = $ArrayLength-$start_num;
+                  if($last_num >= MAX){
+                    for($i=$start_num;$i<$end_num;$i++){
+                      // $favoritedUserId = $favorites[$i]->favorited_user_id;
+                      $userinfos[$i] = $userinfos0[$i];
+                      $userinfos[$i]['status'] = $userinfos0[$i]['status'];
+                    }
+                  }else{
+                    for($i=$start_num;$i<$ArrayLength;$i++){
+                      // $favoritedUserId = $favorites[$i]->favorited_user_id;
+                      $userinfos[$i] = $userinfos0[$i];
+                      $userinfos[$i]['status'] = $userinfos0[$i]['status'];
+                    }
+                  }
+                }
+            }
 
         // $userinfosLength = count($userinfos);
         // dd($userinfos[0]['status']);
 
-        return view('admin.reserch.favoritelist',compact('user','userinfos'));
+        return view('admin.reserch.favoritelist',compact('user','userinfos','page','page_num'));
       }
 
-       public function reserch(){
-
-          $id = Auth::user()->id;
-          $user = User::find($id);
-          $profiles = new User;
-          $profiles = $profiles->all();
-
-          return view('admin.reserch.index',compact('user','profiles'));
-       }
+       // public function reserch(Request $request){
+       //
+       //    $id = Auth::user()->id;
+       //    $user = User::find($id);
+       //    // dd($request);
+       //
+       //
+       //    $profiles = new User;
+       //    $profiles = $profiles->all();
+       //    // $profilesArray = (array)$profiles;
+       //
+       //    // dd($profilesArray);
+       //
+       //    define('MAX','8');
+       //    $array_num = count($profiles);
+       //    $page_num = ceil($array_num/MAX);
+       //
+       //    if(!isset($request['page_id'])){
+       //      $page = 1;
+       //      for($i=0;$i<MAX;$i++){
+       //      // dd($div_profiles[$i]['id']);
+       //      // $div_profiles[$i] = $profiles[$i];
+       //      $div_profiles[$i]['id'] = $profiles[$i]->id;
+       //      $div_profiles[$i]['profile_image_path'] = $profiles[$i]->profile_image_path;
+       //      $div_profiles[$i]['name'] = $profiles[$i]->name;
+       //      $div_profiles[$i]['tag'] = $profiles[$i]->tag;
+       //      $div_profiles[$i]['introduction'] = $profiles[$i]->introduction;
+       //      }
+       //    }else{
+       //      $page = $request['page_id'];
+       //      $start_num = ($page-1)*MAX;
+       //      $end_num = $start_num + MAX;
+       //      for($i=$start_num;$i<$end_num;$i++){
+       //        // $div_profiles[$i] = $profiles[$i]
+       //        $div_profiles[$i]['id'] = $profiles[$i]->id;
+       //        $div_profiles[$i]['profile_image_path'] = $profiles[$i]->profile_image_path;
+       //        $div_profiles[$i]['name'] = $profiles[$i]->name;
+       //        $div_profiles[$i]['tag'] = $profiles[$i]->tag;
+       //        $div_profiles[$i]['introduction'] = $profiles[$i]->introduction;
+       //      }
+       //      // $div_profiles = $profiles[$i];
+       //    }
+       //
+       //    // dd($div_profiles['id']);
+       //    // dd($div_profiles[1]['id']);
+       //    return view('admin.reserch.index',compact('user','div_profiles','profiles','page_num','page'));
+       // }
 
 
        public function reserchindex(Request $request){
           $id = Auth::user()->id;
           $user = User::find($id);
+          $allUsers = new User;
 
-          $reserch = $request->reserch;
-          $tagreserch = $request->tag;
-          // dd($tagreserch);
+          // dd($request->tag);
+          if($request->page_id == null){
+              if ( $request->reserch == null && $request->tag == null ){
+                $profiles = new User;
+                $profiles = $profiles->all();
+                $reserch = $request->reserch;
+                $tag = $request->tag;
+                // dd($profiles);
+              }elseif( $request->reserch !== null || $request->tag !== null){
+                // $introductions = User::where('introduction', 'like', '%'.$cond_title.'%')->get();
+                // $names = User::where('name', 'like', '%'.$cond_title.'%')->get();
+                if(!is_null($request->tag)){
+                  $tagreserch = $request->tag;
+                  $tag = implode(" ",$tagreserch);
+
+                }else{
+                  $tag = 0;
+                }
+                if(!is_null($request->reserch)){
+                  $reserch = $request->reserch;
+                }else{
+                  $reserch = 0;
+                }
+
+                $profiles = $allUsers->where('introduction', 'like', '%' . $reserch . '%')->orWhere('name', 'like', '%' . $reserch . '%')->orWhere('tag', 'like', "%$tag%")->get();
+                // dd($profiles);
+                // dd($tag);
+              }
+            }elseif($request->page_id !== null){
+                // dd($request->reserch);
+              if ( $request->reserch == null && $request->tag == null ){
+                $profiles = new User;
+                $profiles = $profiles->all();
+                $reserch = $request->reserch;
+                $tag = $request->tag;
+              }elseif( $request->reserch !== null || $request->tag !== null){
+
+                if(!is_null($request->tag)){
+                  $tagreserch = $request->tag;
+                  if(!is_array($tagreserch)){
+                    $tag = $tagreserch;
+                  }else{
+                    $tag = implode(" ",$tagreserch);
+                  }
+
+                }else{
+                  $tag = 0;
+                }
+
+                if(!is_null($request->reserch)){
+                  $reserch = $request->reserch;
+                }else{
+                  $reserch = 0;
+                }
+
+                $profiles = User::where('introduction', 'like', '%' . $reserch . '%')->orWhere('name', 'like', '%' . $reserch . '%')->orWhere('tag', 'like', '%' . $tag . '%')->get();
+                // dd($profiles);
+                // dd($tag);
+              }
+            }
+            // dd($profiles);
+            define('MAX','8');
+            $array_num = count($profiles);
+            $page_num = ceil($array_num/MAX);
+
+            if($array_num <= MAX){
+                $page = 1;
+                for($i=0;$i<$array_num;$i++){
+                // dd($div_profiles[$i]['id']);
+                // $div_profiles[$i] = $profiles[$i];
+                $div_profiles[$i]['id'] = $profiles[$i]->id;
+                $div_profiles[$i]['profile_image_path'] = $profiles[$i]->profile_image_path;
+                $div_profiles[$i]['name'] = $profiles[$i]->name;
+                $div_profiles[$i]['tag'] = $profiles[$i]->tag;
+                $div_profiles[$i]['introduction'] = $profiles[$i]->introduction;
+                }
+                // dd('スルー');
+              }else{
+                  if(!isset($request['page_id'])){
+                    $page = 1;
+                    for($i=0;$i<MAX;$i++){
+                      // dd($div_profiles[$i]['id']);
+                      // $div_profiles[$i] = $profiles[$i];
+                      $div_profiles[$i]['id'] = $profiles[$i]->id;
+                      $div_profiles[$i]['profile_image_path'] = $profiles[$i]->profile_image_path;
+                      $div_profiles[$i]['name'] = $profiles[$i]->name;
+                      $div_profiles[$i]['tag'] = $profiles[$i]->tag;
+                      $div_profiles[$i]['introduction'] = $profiles[$i]->introduction;
+                    }
+                  }else{
+                    $page = $request['page_id'];
+                    $start_num = ($page-1)*MAX;
+                    $end_num = $start_num + MAX;
+                    $last_num = $array_num-$start_num;
+
+                    // dd($start_num);
+                    if($last_num < MAX){
+                      for($i=$start_num;$i<$array_num;$i++){
+                        // $div_profiles[$i] = $profiles[$i]
+                        $div_profiles[$i]['id'] = $profiles[$i]->id;
+                        $div_profiles[$i]['profile_image_path'] = $profiles[$i]->profile_image_path;
+                        $div_profiles[$i]['name'] = $profiles[$i]->name;
+                        $div_profiles[$i]['tag'] = $profiles[$i]->tag;
+                        $div_profiles[$i]['introduction'] = $profiles[$i]->introduction;
+                      }
+                    }else{
+                      for($i=$start_num;$i<$end_num;$i++){
+                        // $div_profiles[$i] = $profiles[$i]
+                        $div_profiles[$i]['id'] = $profiles[$i]->id;
+                        $div_profiles[$i]['profile_image_path'] = $profiles[$i]->profile_image_path;
+                        $div_profiles[$i]['name'] = $profiles[$i]->name;
+                        $div_profiles[$i]['tag'] = $profiles[$i]->tag;
+                        $div_profiles[$i]['introduction'] = $profiles[$i]->introduction;
+                      }
+                    }
+                  }
+                }
 
 
-          if(!is_null($tagreserch)){
-            $tag = implode(" ",$tagreserch);
-          }else{
-            $tag = 0;
-          }
+          return view('admin.reserch.index',compact('user','div_profiles','reserch','tag','profiles','page_num','page'));
 
-          if(is_null($reserch)){
-            $reserch = 0;
-          }
-          // dd($tag);
-
-          if ( $reserch !== 0 || $tag !== 0){
-           // $introductions = User::where('introduction', 'like', '%'.$cond_title.'%')->get();
-           // $names = User::where('name', 'like', '%'.$cond_title.'%')->get();
-           $profiles = User::where('introduction', 'like', '%' . $reserch . '%')->orWhere('name', 'like', '%' . $reserch . '%')->orWhere('tag', 'like', '%' . $tag . '%')->get();
-           // dd($profiles);
-           // dd($tag);
-          }else{
-            $profiles = array();
-            // dd('0');
-          }
-
-          return view('admin.reserch.index',compact('user','profiles'));
        }
+
+
+
 
        public function offer(Request $request){
           $id = Auth::user()->id;
@@ -327,12 +630,9 @@ class ProfileController extends Controller
          // 自分にオファーを送ったユーザーの情報
 
          $userinfos = array_merge($userinfos1,$userinfos2);
-         // dd($userinfos);
-         // foreach ($userinfos as $index => $value) {
-         // $sort[$index] = $value['created_at'];
-         // }
-         // array_multisort($sort, SORT_ASC, $userinfos);
-         // dd($userinfos);
+
+
+         
 
 
          return view('admin.message.offerlist',compact('user','userinfos'));

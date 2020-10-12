@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
+  Route::get('/home', 'Guest\RegisterController@top');
   Route::get('/', 'Guest\RegisterController@top');
   Route::get('auth/register','Guest\RegisterController@register');
   Route::get('auth/login','Guest\RegisterController@login');
@@ -30,7 +30,7 @@ Route::group(['prefix' => 'admin'],function(){
    Route::get('profile/edit','Admin\ProfileController@edit')->middleware('auth');
    Route::post('profile/edit','Admin\ProfileController@update')->middleware('auth');
    Route::get('profile/info','Admin\ProfileController@info')->middleware('auth');
-   Route::get('reserch/index','Admin\ProfileController@reserch')->middleware('auth');
+   Route::get('reserch/index','Admin\ProfileController@reserchindex')->middleware('auth');
    Route::post('reserch/index','Admin\ProfileController@reserchindex')->middleware('auth');
    Route::get('gallary/edit','Admin\ProfileController@gallary_edit')->middleware('auth');
    // Route::post('gallary/edit','Admin\ProfileController@gallary_update')->middleware('auth');

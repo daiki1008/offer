@@ -1,11 +1,13 @@
 @extends('layouts.admin')
 @section('title','検索')
 @section('content')
+<div class="main-container">
   <div class="profileEdit-top-area">
 
       <div class="edit-profile-image">
         <img id="edited-profile-image" src="{{ $user['profile_image_path']  }}">
       </div>
+      <div class="edit_White_base"></div>
 
       <label for="profileImage_uplode" class="profileImage_uplode_label">
         <span class="fileUplode_btn">プロフィール画像を選択</span>
@@ -24,7 +26,7 @@
 
   <div class="profile-edit-area">
     <h5 class="edit_profile_text_top">プロフィールの編集</h5>
-        <textarea class="edit_profile_text" name="edit_profile_text" rows="15" cols="90">
+        <textarea class="edit_profile_text" name="edit_profile_text" rows="13" cols="90">
           {{ $user['introduction'] }}
         </textarea>
   </div>
@@ -37,9 +39,13 @@
   <div class="uplode_form_area">
       <h5>ギャラリーの編集</h5>
 
-      <input id="uplodeFile" class="uplode_file" type="file" multiple="multiple" name="uplode_file[]">
+      <!-- <input id="uplodeFile" class="uplode_file" type="file" multiple="multiple" name="uplode_file[]"> -->
       <!-- <p class="img-comment">コメント</p> -->
       <!-- <input id="imageComment" class="input-img-comment" type="text" name="comment"> -->
+      <label for="uplodeFile" class="Image_uplode_label">
+        <span class="Uplode_btn">画像を選択</span>
+      <input id="uplodeFile" class="uplode_file" type="file" multiple="multiple" name="uplode_file[]">
+      </label>
       <button  class="file-submit-btn" type="submit" >
         <p>UPLODE</p>
       </button>
@@ -56,9 +62,9 @@
       <!-- </form> -->
   </div>
 
-  <div class="container-gallary-area">
+  <div class="container-editGallary-area">
 
-    <div class="profile_gallary_head">
+    <div class="profile_editGallary_head">
      <h5 class="profile_gallary">Gallary</h5>
     </div>
 
@@ -99,6 +105,7 @@
   </div>
 
 </div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>

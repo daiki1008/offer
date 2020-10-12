@@ -2,12 +2,13 @@
 @section('title','プロフィール')
 @section('content')
 
-<div class="profile-container">
+<div class="main-container">
 
    <div class="container-top-area">
        <div class="profile-image">
        <img src="{{ asset(  $userinfo['profile_image_path']  ) }}">
        </div>
+       <div class="white_base"></div>
 
 
        <div class="profile-top-area">
@@ -36,7 +37,7 @@
    </div>
 
    <div class="container-main-area">
-     <h5 class="profile_text_top">Profile</h5>
+     <h5 class="profile_text_head">Profile</h5>
        <div class="profile_text_area">
          <p class="profile_text">{{ $userinfo['introduction'] }}</p>
        </div>
@@ -52,6 +53,18 @@
        @foreach($images as $image)
        <img class="gallary_image" src="{{ asset(  $image['image_path']  ) }}" alt="{{  $image['id'] }}">
        @endforeach
+     </div>
+
+     <div class="page_area">
+       @if($page > 1)
+         <button class="index_prev_btn"><a href="  {{ action('Admin\ProfileController@otherinfo',['page_id'=> $page-1,'userinfo_id'=> $userinfo->id ]) }}  ">←prev</a></button>
+       @endif
+       <div class="index_page">
+         <p><?php echo $page ;?> / <?php echo $page_num ;?></p>
+       </div>
+       @if( $page < $page_num)
+         <button class="index_next_btn"><a href="  {{ action('Admin\ProfileController@otherinfo',['page_id'=> $page+1,'userinfo_id'=> $userinfo->id ]) }}  ">next→</a></button>
+       @endif
      </div>
 
     <div class="gallary_modal_wrap">
