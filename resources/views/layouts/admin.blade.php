@@ -8,13 +8,13 @@
 
       <title>@yield('title')</title>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-      <script src="{{ asset('js/app.js') }}" defer></script>
-      <script src="{{ asset('js/offer.js') }}" defer></script>
+      <script src="{{ secure_asset('js/app.js') }}" defer></script>
+      <script src="{{ secure_asset('js/offer.js') }}" defer></script>
 
       <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
 
-      <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-      <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+      <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+      <link href="{{ secure_asset('css/admin.css') }}" rel="stylesheet">
    </head>
 
    <body>
