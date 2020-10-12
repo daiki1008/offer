@@ -93,12 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-$(document).ready(function () {
-  alart('OK');
-  $('.cancel').click(function () {
-    $('.gallary_modal_wrap').fadeOut();
-  });
-});
+
 
 /***/ }),
 
