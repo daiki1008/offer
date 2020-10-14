@@ -27,18 +27,20 @@
 
      <div class="velt"></div>
 
+
      <div class="nav-bar-area">
        <ul class="nav-ber">
-         <li class="nav-btn-right"><a href="{{ route('logout') }}"
+         <li ><a class="nav-btn-right" href="{{ route('logout') }}"
            onclick="event.preventDefault();
-                          document.getElementById('logout-form').submit();">
-             LOGOUT</a>
+                          document.getElementById('logout-form').submit();"><span class="nav-btn-text">
+             LOGOUT
+           </span></a>
              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                  @csrf
              </form>
          </li>
 
-         <li class="nav-btn-right"><a href="{{ asset('admin/reserch/index') }}">SERCH</a></li>
+         <li ><a class="nav-btn-right" href="{{ asset('admin/reserch/index') }}"><span class="nav-btn-text">SERCH</span></a></li>
        </ul>
      </div>
 

@@ -346,7 +346,14 @@ class ProfileController extends Controller
           $imageId = $request->imageId;
           // dd($imageId);
 
-          $image = Image::where('id', 'like', $imageId)->where('user_id', 'like', $id)->delete();
+          $image = Image::where('id', 'like', $imageId)->where('user_id', 'like', $id)->first();
+          Log::debug($image['image_path']);
+          $image_path = $image['image_path'];
+
+
+          $disk = Storage::disk('s3');
+          $disk->delete($image_path);
+          $image->delete();
 
 
           return true;

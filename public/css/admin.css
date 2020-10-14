@@ -17,9 +17,8 @@ footer{
 }
 
 main {
-  width: 100%;
-  height: 1800px;
-  margin: 70px auto 30px;
+  margin: 0;
+  padding: 0;
 }
 
 h1 h2 h3 h4 h5 div p {
@@ -43,6 +42,25 @@ a {
   margin-left: auto;
   margin-right: auto;
   color: #333333;
+  text-decoration: none;
+}
+
+.content{
+  width: 100%;
+  height: 1800px;
+  margin: 70px auto 30px;
+  position: relative;
+  margin-top: 0;
+  padding-top: 10px;
+}
+
+.guest_content{
+  width: 100%;
+  height: 800px;
+  margin: 70px auto 30px;
+  position: relative;
+  margin-top: 0;
+  padding-top: 10px;
 }
 
 .velt{
@@ -104,26 +122,62 @@ a {
 }
 
 .nav-btn-right {
-  height: 50px;
   width: 130px;
+  height: 50px;
   margin-left: 5px;
+  padding-top: 0;
+  position: relative;
   list-style-type: none;
   text-align: center;
+  text-decoration: none;
   float: right;
   font-size: 17px;
   display: flex;
+  background-color: #FFFFFF;
   border: solid #777777 1px;
   border-radius: 2px;
 }
-.nav-btn-right a{
+
+.nav-btn-text{
+  width: 130px;
+  height: 50px;
+  padding-top: 11px;
   color: #444444;
+  z-index: 2;
 }
 
-.content{
-  position: relative;
-  margin-top: 0;
-  padding-top: 10px;
+.nav-btn-text::before{
+  width: 128px;
+  height: 48px;
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 0;
+  display: block;
+  background: #F5F5F5;
+  z-index: -1;
+  transition: 1s;
+  text-decoration: none;
 }
+
+.nav-btn-text:hover{
+  width: 130px;
+  height: 50px;
+  color: #444444;
+  /* background-color: #DDDDDD; */
+  text-decoration: none;
+}
+
+.nav-btn-text:hover:before{
+  width: 128px;
+  height: 48px;
+  text-decoration: none;
+}
+/* .nav-btn-right{
+  color: #444444;
+  display: block;
+  text-decoration: none;
+} */
 
 .side-menu {
   width: 290px;
@@ -149,7 +203,7 @@ a {
 
 .side-menu-top {
   width: 250px;
-  height: 140px;
+  height: 130px;
   margin-top: 15px;
   margin-left: 15px;
 }
@@ -164,31 +218,20 @@ a {
   float: left;
 }
 
-.side-profile{
-  height: 40px;
+.side-profile {
   float: left;
-  margin-top: 5px;
+  margin-top: 20px;
   margin-left: 9px;
 }
-
-.side-profile-text{
-  font-size: 18px;
-  margin-bottom: 0;
-}
-
-.side-job-tag{
-  border: 1px solid #DDDDDD;
-  border-radius: 5px;
-  box-shadow: inset 1px 2px 5px 0 rgba(0, 0, 0, 0.05);
-  background-color: #F0F8FF;
-  padding: 0 5px;
-  margin-left: -3px;
-  color: #333333;
-  font-size: 14px;
-}
 .side-job-tag p{
-  font-size: 14px;
-  margin-bottom: 0;
+  font-size: 13px;
+  margin-top: -9px;
+}
+
+.side-profile-text {
+  font-size: 16px;
+  margin-top: -9px;
+  margin-bottom: 5px;;
 }
 
 .side-nav-area {
@@ -364,7 +407,6 @@ a {
   font-weight: 100;
   color: #444444;
   word-wrap: break-word;
-  white-space: pre-wrap;
 }
 
 .container-gallary-area{
@@ -818,7 +860,7 @@ a {
 .list-favorite-btn{
   width: 100px;
   height: 28px;
-  margin-top: 20px;
+  margin-top: 8px;
   padding-top: 2px;
   border: 1px solid #EEEEEE;
   border-radius: 10px;
@@ -970,9 +1012,6 @@ textarea {
   margin-top: 2px;
   color: #444444;
 }
-.message{
-  white-space: pre-wrap;
-}
 
 /* reserch/index */
 
@@ -1018,26 +1057,20 @@ textarea {
   font-size: 18px;
 }
 .index-tag{
-  /* width: 200px; */
-  height: 23px;
-  border: 1px solid #DDDDDD;
-  border-radius: 5px;
-  box-shadow: inset 1px 2px 5px 0 rgba(0, 0, 0, 0.05);
-  margin: 33px 0px 0px 8px;
-  background-color: #F0F8FF;
-  padding: 0 5px;
+  width: 200px;
+  height: 30px;
+  margin: 30px 0px 5px 8px;
   float: left;
-  font-size: 14px;
-  color: #333333;
+  font-size: 18px;
 }
 
 .index-introduction{
-  width: 400px;
-  height: 68px;
+  width: 490px;
+  height: 75px;
   font-size: 14px;
-  margin-top: 5px;
+  margin-top: 15px;
   overflow: hidden;
-  /* white-space: nowrap; */
+  white-space: nowrap;
   text-overflow: ellipsis;
   word-wrap: break-word;
   clear: left;
@@ -1128,8 +1161,8 @@ textarea {
 
 .page_area{
   width: 300px;
-  height: 50px;
-  margin: 10px auto 0;
+  height: 150px;
+  margin: 0 auto;
   position: relative;
 }
 
@@ -1165,6 +1198,15 @@ textarea {
 
 
 -----------------------------------------------------------
+
+.login-btn-area{
+  margin: 0 auto;
+}
+
+.remember-me{
+  margin-top: -22px;
+}
+
 
 #profile-text {
   height: 100px;

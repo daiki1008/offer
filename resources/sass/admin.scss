@@ -17,9 +17,8 @@ footer{
 }
 
 main {
-  width: 100%;
-  height: 1800px;
-  margin: 70px auto 30px;
+  margin: 0;
+  padding: 0;
 }
 
 h1 h2 h3 h4 h5 div p {
@@ -43,6 +42,25 @@ a {
   margin-left: auto;
   margin-right: auto;
   color: #333333;
+  text-decoration: none;
+}
+
+.content{
+  width: 100%;
+  height: 1800px;
+  margin: 70px auto 30px;
+  position: relative;
+  margin-top: 0;
+  padding-top: 10px;
+}
+
+.guest_content{
+  width: 100%;
+  height: 800px;
+  margin: 70px auto 30px;
+  position: relative;
+  margin-top: 0;
+  padding-top: 10px;
 }
 
 .velt{
@@ -104,26 +122,62 @@ a {
 }
 
 .nav-btn-right {
-  height: 50px;
   width: 130px;
+  height: 50px;
   margin-left: 5px;
+  padding-top: 0;
+  position: relative;
   list-style-type: none;
   text-align: center;
+  text-decoration: none;
   float: right;
   font-size: 17px;
   display: flex;
+  background-color: #FFFFFF;
   border: solid #777777 1px;
   border-radius: 2px;
 }
-.nav-btn-right a{
+
+.nav-btn-text{
+  width: 130px;
+  height: 50px;
+  padding-top: 11px;
   color: #444444;
+  z-index: 2;
 }
 
-.content{
-  position: relative;
-  margin-top: 0;
-  padding-top: 10px;
+.nav-btn-text::before{
+  width: 128px;
+  height: 48px;
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 0;
+  display: block;
+  background: #F5F5F5;
+  z-index: -1;
+  transition: 1s;
+  text-decoration: none;
 }
+
+.nav-btn-text:hover{
+  width: 130px;
+  height: 50px;
+  color: #444444;
+  /* background-color: #DDDDDD; */
+  text-decoration: none;
+}
+
+.nav-btn-text:hover:before{
+  width: 128px;
+  height: 48px;
+  text-decoration: none;
+}
+/* .nav-btn-right{
+  color: #444444;
+  display: block;
+  text-decoration: none;
+} */
 
 .side-menu {
   width: 290px;
@@ -1144,6 +1198,15 @@ textarea {
 
 
 -----------------------------------------------------------
+
+.login-btn-area{
+  margin: 0 auto;
+}
+
+.remember-me{
+  margin-top: -22px;
+}
+
 
 #profile-text {
   height: 100px;

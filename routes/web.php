@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 
   Route::get('/home', 'Guest\RegisterController@top');
+  Route::get('/auth/logout', 'Guest\RegisterController@top');
   Route::get('/', 'Guest\RegisterController@top');
   Route::get('auth/register','Guest\RegisterController@register');
   Route::get('auth/login','Guest\RegisterController@login');
