@@ -28,8 +28,8 @@ class ProfileController extends Controller
         $id = Auth::user()->id;
         $user = User::find($id);
 
-        $images0 = Image::where('user_id', 'like', $id)->get();
-
+        $images0 = Image::where('user_id', 'like', $id)->orderBy("images.id", "DESC")->get();
+        $images0->sortByDesc('id');
 
         // dd($favorite);
         define('MAX','24');
@@ -100,12 +100,15 @@ class ProfileController extends Controller
         if(isset($request['userinfo_id'])){
         // dd($request['userinfo_id']);
         $userinfo = User::find($request['userinfo_id']);
-        $images0 = Image::where('user_id', 'like', $request['userinfo_id'])->get();
+        $images0 = Image::where('user_id', 'like', $request['userinfo_id'])->orderBy("images.id", "DESC")->get();
+        $images0->sortByDesc('id');
       }else{
         $userinfo = User::find($request->id);
-        $images0 = Image::where('user_id', 'like', $request->id)->get();
+        $images0 = Image::where('user_id', 'like', $request->id)->orderBy("images.id", "DESC")->get();
+        $images0->sortByDesc('id');
 
       }
+
 
 
         $favorite = Favorite::where('favorite_user_id',$id)->where('favorited_user_id',$userinfo['id'])->get();
@@ -197,7 +200,8 @@ class ProfileController extends Controller
         $user = User::find($id);
         // $images = Image::where('user_id', 'like', $id)->get();
         $images = array();
-        $images0 = Image::where('user_id', 'like', $id)->get();
+        $images0 = Image::where('user_id', 'like', $id)->orderBy("images.id", "DESC")->get();
+        // $images0=$images0->sortBy('id');
 
 
         // dd($favorite);
