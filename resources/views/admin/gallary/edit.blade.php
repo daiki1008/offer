@@ -135,7 +135,7 @@ $(function(){
     var profileText = $(".edit_profile_text").val();
     var fileData = document.getElementById("profileImage_uplode").files[0];
 
-    alert(fileData);
+    // alert(fileData);
     var form = new FormData();
 
     form.append( "name", nameData );
@@ -155,12 +155,12 @@ $(function(){
         //成功の場合、以下を行う。
         success: function(data){
             // window.location.reload();
-            alert('プロフィールを更新しました');
+            alert('プロフィールを更新しました。');
         },
 
         //失敗の場合、以下を行う。
         error : function(){
-            alert('通信ができない状態です。');
+            alert('プロフィールを更新できませんでした。');
         }
     });
 // }
@@ -298,7 +298,7 @@ $(function(){
 
         //失敗の場合、以下を行う。
         error : function(){
-            alert('通信ができない状態です。');
+            alert('アップロードする画像を洗濯してください。');
         }
     });
 }
@@ -336,7 +336,7 @@ $(function(){
 
           },
     error: function(){
-            alert('失敗しました');
+            alert('削除できませんでした。');
     }
   });
 

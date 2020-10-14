@@ -220,12 +220,31 @@ a {
 
 .side-profile {
   float: left;
-  margin-top: 20px;
+  margin-top: 13px;
   margin-left: 9px;
 }
+.side-user-name{
+   margin-bottom: 7px;
+}
+
+.side-user-name p{
+  display: block;
+  font-size: 19px;
+}
+
 .side-job-tag p{
   font-size: 13px;
   margin-top: -9px;
+  height: 20px;
+  /* margin: 37px 0px 5px 8px; */
+  padding-top: 0;
+  font-size: 13px;
+  padding: 0 3px 0;
+  display: block;
+  border: 1px solid #CCCCCC;
+  background-color: #F0F8FF;
+  box-shadow: inset 1px 2px 7px 0 rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
 }
 
 .side-profile-text {
@@ -375,9 +394,17 @@ a {
 }
 
 .profile_job_tag {
-  font-size:  20px;
+  width: 60px;
+  height: 25px;
+  font-size:  16px;
   color: #444444;
-  margin: 0;
+  margin-left: -1px;
+  padding-left: 5px;
+  display: block;
+  border: 1px solid #CCCCCC;
+  background-color: #F0F8FF;
+  box-shadow: inset 1px 2px 7px 0 rgba(0, 0, 0, 0.09);
+  border-radius: 5px;
 }
 
 
@@ -859,13 +886,14 @@ a {
 
 }
 .list-favorite-btn{
-  width: 100px;
-  height: 28px;
-  margin-top: 8px;
-  padding-top: 2px;
+  width: 80px;
+  height: 23px;
+  margin-top: 23px;
+  margin-left: 10px;
   border: 1px solid #EEEEEE;
-  border-radius: 10px;
+  border-radius: 5px;
   position: absolute;
+  font-size: 14px;
 }
 
 .favorite-index-table{
@@ -1045,28 +1073,37 @@ textarea {
   border-radius: 130px;
   margin: 9px 10px 0px 18px;
   float: left;
+  object-fit: cover;
 }
 
 .profile-index-head{
   width: 400px;
-  height: 150px;
+  height: 50px;
   float: left;
   margin-left: 12px;
+  margin-bottom: 5px;
 }
 
 .index-name{
   /* width: 80px; */
   height: 30px;
-  margin: 30px 0px 5px 0px;
+  margin: 20px 0px 3px 0px;
   float: left;
-  font-size: 18px;
+  font-size: 20px;
 }
 .index-tag{
-  width: 200px;
-  height: 30px;
-  margin: 30px 0px 5px 8px;
+  /* width: 40px; */
+  height: 20px;
+  margin: 27px 0px 3px 8px;
+  padding-top: 0;
   float: left;
-  font-size: 18px;
+  font-size: 13px;
+  padding: 0 5px 0;
+  display: block;
+  border: 1px solid #CCCCCC;
+  background-color: #F0F8FF;
+  box-shadow: inset 1px 2px 7px 0 rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
 }
 
 .index-introduction{
@@ -1074,8 +1111,10 @@ textarea {
   height: 75px;
   font-size: 14px;
   margin-top: 15px;
+  padding-top: 5px;
+  border-top: 1px solid #DDDDDD;
   overflow: hidden;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   text-overflow: ellipsis;
   word-wrap: break-word;
   clear: left;

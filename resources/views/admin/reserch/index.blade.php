@@ -41,9 +41,9 @@
             <div class="index-tag">{{ $profile['tag'] }}</div>
             <div class="index-introduction"><p>{{ $profile['introduction'] }}</p></div>
           </div>
-          <div class="profile-index-function">
+          <!-- <div class="profile-index-function">
             <div class="index-favorite-btn"><a href="#">Favorite</a></div>
-          </div>
+          </div> -->
 
         </div>
       </a>
