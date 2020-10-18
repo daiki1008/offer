@@ -636,10 +636,15 @@ class ProfileController extends Controller
 
          if(isset($request['offer-image'])){
 
-           $path = $request->file('offer-image')->store('public/image');
-           $path2 = str_replace('public/', '', $path);
-           // dd($path2);
-           $message->image_path = $path2;
+           // $path = $request->file('offer-image')->store('public/image');
+           // $path2 = str_replace('public/', '', $path);
+           // // dd($path2);
+           // $message->image_path = $path2;
+
+           $image = $request['offer-image'];
+           $path = Storage::disk('s3')->putFile('/',$image,'public');
+           // $path2 = str_replace('public/', '', $path);
+           $message->image_path = Storage::disk('s3')->url($path);
          }else{
            $message->image_path = "";
          }
@@ -647,7 +652,7 @@ class ProfileController extends Controller
            $message->save();
 
 
-         return redirect('admin/profile/info');
+           return redirect('admin/profile/info');
        }
 
        public function offerlist(){
@@ -673,7 +678,6 @@ class ProfileController extends Controller
          if($offercount!==0){
            for($i =0;$i<$offercount;$i++){
              $sendOfferUserId = $offerMessages[$i]->receivedUser_id;
-             $masseges = $offerMessages[$i];
              $userinfos1[$i] = User::where('id',$sendOfferUserId)->first();
              $userinfos1[$i]['message'] = $offerMessages[$i]->message_content;
              $userinfos1[$i]['check'] = "0";
@@ -688,7 +692,6 @@ class ProfileController extends Controller
          if($receivedOffercount!==0){
            for($i =0;$i<$receivedOffercount;$i++){
              $sendOfferUserId = $receivedOfferMessages[$i]->sendUser_id;
-             $masseges = $receivedOfferMessages[$i];
              $userinfos2[$i] = User::where('id',$sendOfferUserId)->first();
              $userinfos2[$i]['message'] = $receivedOfferMessages[$i]->message_content;
              $userinfos2[$i]['check'] = "1";
@@ -697,8 +700,9 @@ class ProfileController extends Controller
            $userinfos2 = array();
          }
          // 自分にオファーを送ったユーザーの情報
-
+         // Log::debug($userinfos);
          $userinfos = array_merge($userinfos1,$userinfos2);
+         // dd($userinfos);
 
 
 
@@ -711,9 +715,14 @@ class ProfileController extends Controller
          $id = Auth::user()->id;
          $user = User::find($id);
          $userinfo = $request->all();
+         // dd($request->id);
+         // dd($id);
+         // dd($request->id);
+         $message = Message::where('sendUser_id',$id)->where('receivedUser_id',$request->id)->where('status',1)->first();
+         // dd($message);
          // dd($userinfo['message']);
          // $userinfo->message = $request->message;
-         return view('admin.message.offermessage',compact('user','userinfo'));
+         return view('admin.message.offermessage',compact('user','message'));
        }
 
 
