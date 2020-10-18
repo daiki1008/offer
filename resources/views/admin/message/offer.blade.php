@@ -7,6 +7,11 @@
 
 
 <div class="offer-form-wrap">
+  @if(@user->id == @userinfo->id)
+  <div class="attention">
+    <p>自分にはオファーを送れません</p>
+  </div>
+  @else
   <form class="offer-send-form" action="{{ action('Admin\ProfileController@sendoffer') }}" method="post" enctype="multipart/form-data">
     @csrf
     <p class="offermessage">OFFERMESSAGE</p>
@@ -24,6 +29,7 @@
     </buttom>
 
   </form>
+  @endif
 </div>
 
 @endsection
