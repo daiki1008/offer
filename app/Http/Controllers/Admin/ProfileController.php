@@ -615,11 +615,11 @@ class ProfileController extends Controller
        public function offer(Request $request){
           $id = Auth::user()->id;
           $user = User::find($id);
-          $userinfo = $request->id;
-          // dd($userinfoId);
+          $userinfoId = $request->id;
+          // dd($user->id);
 
 
-          return view('admin.message.offer',compact('user','userinfo'));
+          return view('admin.message.offer',compact('user','userinfoId'));
        }
 
        public function sendoffer(Request $request){
@@ -715,17 +715,21 @@ class ProfileController extends Controller
          $id = Auth::user()->id;
          $user = User::find($id);
          $userinfo = $request->all();
-         // dd($request->id);
+         // dd($request);
          // dd($id);
-         // dd($request->id);
-         $message = Message::where('sendUser_id',$id)->where('receivedUser_id',$request->id)->where('status',1)->first();
+         // dd($request->check);
+         if($request->check == 0){
+           $message = Message::where('sendUser_id',$id)->where('receivedUser_id',$request->id)->where('status',1)->first();
          // dd($message);
-         // dd($userinfo['message']);
+         // dd($request['check']);
          // $userinfo->message = $request->message;
+        }elseif($request->check == 1){
+           $message = Message::where('sendUser_id',$request->id)->where('receivedUser_id',$id)->where('status',1)->first();
+         }
+
+         // dd($message->image_path);
          return view('admin.message.offermessage',compact('user','message'));
        }
-
-
 
 
 }

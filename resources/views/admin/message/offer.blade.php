@@ -7,11 +7,12 @@
 
 
 <div class="offer-form-wrap">
-  @if(@user->id == @userinfo->id)
-  <div class="attention">
+  @if($user->id == $userinfoId)
+  <div class="offerpage_error">
     <p>自分にはオファーを送れません</p>
   </div>
-  @else
+  @endif
+  @if($user['id'] !== $userinfoId)
   <form class="offer-send-form" action="{{ action('Admin\ProfileController@sendoffer') }}" method="post" enctype="multipart/form-data">
     @csrf
     <p class="offermessage">OFFERMESSAGE</p>
@@ -24,7 +25,7 @@
     </textarea>
     <p class="tenpu">・添付ファイル</p>
     <input type="file" name="offer-image" class="offer-image">
-    <button class="offer-submit" name="userinfo" value="{{ $userinfo }}">
+    <button class="offer-submit" name="userinfo" value="{{ $userinfoId }}">
       <p>OFFERする</p>
     </buttom>
 
