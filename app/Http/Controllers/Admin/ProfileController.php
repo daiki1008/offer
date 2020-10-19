@@ -27,6 +27,7 @@ class ProfileController extends Controller
      public function info(Request $request){
         $id = Auth::user()->id;
         $user = User::find($id);
+        // dd($user->profile_image_path);
 
         $images0 = Image::where('user_id', 'like', $id)->orderBy("images.id", "DESC")->get();
         $images0->sortByDesc('id');

@@ -60,8 +60,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'introduction' => ['required', 'string'],
-            'tag.*' =>  ['string'],
-            'yagou' => ['required', 'string', 'max:255'],
+            'tag.*' =>  ['required','string'],
+            // 'yagou' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -77,21 +77,45 @@ class RegisterController extends Controller
         // dd($data['profile_image_path']);
         // $path = $data['profile_image_path']->store('public/image');
         // $path2 = str_replace('public/', '', $path);
-        $image = $data['profile_image_path'];
-        $path = Storage::disk('s3')->putFile('/',$image,'public');
-        // $path2 = str_replace('public/', '', $path);
-        // dd($path);
+        if(isset($data['profile_image_path'])){
+          $image = $data['profile_image_path'];
+          $path = Storage::disk('s3')->putFile('/',$image,'public');
 
-        $tag = implode(" ",$data['tag']);
+          $tag = implode(" ",$data['tag']);
 
-        return User::create([
+          return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'introduction' => $data['introduction'],
             'tag' => $tag,
-            'yagou' => $data['yagou'],
+            'yagou' => "yagou",
             'profile_image_path' => Storage::disk('s3')->url($path),
             'password' => Hash::make($data['password']),
+          ]);
+        }else{
+
+        $tag = implode(" ",$data['tag']);
+
+        return User::create([
+          'name' => $data['name'],
+          'email' => $data['email'],
+          'introduction' => $data['introduction'],
+          'tag' => $tag,
+          'yagou' => "yagou",
+          'profile_image_path' => Storage::disk('s3')->url('EBC3bMm9csSvZEL7H8XcVa4VN7xobrWE5ks7jeKG.jpeg'),
+          'password' => Hash::make($data['password']),
         ]);
+
+      }
+
+
+
+
+
+
+
+
+
+
     }
 }

@@ -262,7 +262,6 @@ $(function(){
 
 
   $('.file-submit-btn').click(function(){
-    alert(fileArray[0]);
     $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -278,7 +277,9 @@ $(function(){
     for (var i=0;i<fileArrayNum;i++){
     // form.append( "text", textData );
     form.append( "file", fileArray[i] );
-    console.log(fileArray[i]);
+    // console.log(fileArray[i]);
+    // alert(fileArray[i]);
+
 
 
     $.ajax({
@@ -298,7 +299,7 @@ $(function(){
 
         //失敗の場合、以下を行う。
         error : function(){
-            alert('アップロードする画像を洗濯してください。');
+            alert('アップロードする選択を洗濯してください。');
         }
     });
 }

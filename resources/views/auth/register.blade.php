@@ -53,10 +53,10 @@
                           </ul>
                         </div>
 
-                        <div class="form-group row">
+                        <!-- <div class="form-group row">
                           <label>社名・屋号</label>
                           <input type="text"  name="yagou"  class="form-control" value="{{ old('yagou') }}">
-                        </div>
+                        </div> -->
 
                         <div class="form-group input-profile row">
                           <label>プロフィール</label>
