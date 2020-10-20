@@ -19,7 +19,7 @@
     </div>
     @else
     <div class="file_check_area">
-      <p class="tenpu">・添付ファイル{{ $message['image_path']}}</p>
+      <p class="tenpu">・添付ファイル   [ <a href="{{ $message['image_path'] }}">{{ $message['image_path']}}</a>  ]</p>
     </div>
     @endif
 

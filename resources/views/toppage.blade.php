@@ -6,13 +6,13 @@
  <!-- <img> -->
  <div class="text-white row">
    <div class="col-3">
-     <!-- <p>プロフィール画像</p> -->
+     <p>プロフィール画像</p>
    </div>
    <div class="col-9">
-     <img src="{{-- asset(Auth::user()->profile_image_path) --}}" alt="">
+     <img src="https://s3.Region.amazonaws.com/kwdofferimage/1648206_s.jpg" alt="">
    </div>
    <div class="col-3">
-     
+
    </div>
    <div class="col-9">
 
