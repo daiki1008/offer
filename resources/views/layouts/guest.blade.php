@@ -20,7 +20,7 @@
      <header>
      <div class="top-area">
 
-         <h1 class="logo"><a href="/">offer</a></h1>
+         <h1 class="logo">offer</h1>
          <!-- <img src="../../../../public/image/Offerlog.jpg"> -->
      </div>
      </header>
