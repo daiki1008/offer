@@ -20,10 +20,6 @@ class ProfileController extends Controller
        return view('auth.register');
      }
 
-     public function create(Request $request){
-
-     }
-
      public function info(Request $request){
         $id = Auth::user()->id;
         $user = User::find($id);
@@ -125,14 +121,6 @@ class ProfileController extends Controller
         $favorite->status = "0";
         $favorite->save();
       }
-          // dd(isset($favorite));
-        // dd($favorite->status);
-
-        // $images = Image::where('user_id', 'like', $request->id)->get();
-        // dd($user);
-
-
-
 
         // dd($favorite);
         define('MAX','24');
