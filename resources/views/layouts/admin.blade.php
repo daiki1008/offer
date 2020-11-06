@@ -70,7 +70,7 @@
            <li class="side-nav"><a href="{{ action('Admin\ProfileController@info') }}" class="side-nav">MyPage</a></li>
            <li class="side-nav"><a href="{{ action('Admin\ProfileController@offerlist') }}" class="side-nav">Offer List</a></li>
            <li class="side-nav"><a href="{{ action('Admin\ProfileController@favoritelist') }}" class="side-nav">Favorite List</a></li>
-           <li class="side-nav"><a href="#" class="side-nav">Message</a></li>
+           <li class="side-nav"><a href="{{ action('Admin\ProfileController@message') }}" class="side-nav">Message</a></li>
            <!-- <li class="side-nav"><a href="#" class="side-nav">Room</a></li> -->
          </ul>
 
@@ -86,4 +86,14 @@
     </footer>
    </body>
 
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+   <script>
+   $(function(){
+
+     var height = $('.main-content').height();
+     $('.side-menu').height(height);
+
+
+   });
+   </script>
 </html>

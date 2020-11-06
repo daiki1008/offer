@@ -421,53 +421,6 @@ class ProfileController extends Controller
         return view('admin.reserch.favoritelist',compact('user','userinfos','page','page_num'));
       }
 
-       // public function reserch(Request $request){
-       //
-       //    $id = Auth::user()->id;
-       //    $user = User::find($id);
-       //    // dd($request);
-       //
-       //
-       //    $profiles = new User;
-       //    $profiles = $profiles->all();
-       //    // $profilesArray = (array)$profiles;
-       //
-       //    // dd($profilesArray);
-       //
-       //    define('MAX','8');
-       //    $array_num = count($profiles);
-       //    $page_num = ceil($array_num/MAX);
-       //
-       //    if(!isset($request['page_id'])){
-       //      $page = 1;
-       //      for($i=0;$i<MAX;$i++){
-       //      // dd($div_profiles[$i]['id']);
-       //      // $div_profiles[$i] = $profiles[$i];
-       //      $div_profiles[$i]['id'] = $profiles[$i]->id;
-       //      $div_profiles[$i]['profile_image_path'] = $profiles[$i]->profile_image_path;
-       //      $div_profiles[$i]['name'] = $profiles[$i]->name;
-       //      $div_profiles[$i]['tag'] = $profiles[$i]->tag;
-       //      $div_profiles[$i]['introduction'] = $profiles[$i]->introduction;
-       //      }
-       //    }else{
-       //      $page = $request['page_id'];
-       //      $start_num = ($page-1)*MAX;
-       //      $end_num = $start_num + MAX;
-       //      for($i=$start_num;$i<$end_num;$i++){
-       //        // $div_profiles[$i] = $profiles[$i]
-       //        $div_profiles[$i]['id'] = $profiles[$i]->id;
-       //        $div_profiles[$i]['profile_image_path'] = $profiles[$i]->profile_image_path;
-       //        $div_profiles[$i]['name'] = $profiles[$i]->name;
-       //        $div_profiles[$i]['tag'] = $profiles[$i]->tag;
-       //        $div_profiles[$i]['introduction'] = $profiles[$i]->introduction;
-       //      }
-       //      // $div_profiles = $profiles[$i];
-       //    }
-       //
-       //    // dd($div_profiles['id']);
-       //    // dd($div_profiles[1]['id']);
-       //    return view('admin.reserch.index',compact('user','div_profiles','profiles','page_num','page'));
-       // }
 
 
        public function reserchindex(Request $request){
@@ -690,7 +643,10 @@ class ProfileController extends Controller
          }
          // 自分にオファーを送ったユーザーの情報
          // Log::debug($userinfos);
-         $userinfos = array_merge($userinfos1,$userinfos2);
+         $all  = array_merge($userinfos1,$userinfos2);
+         $collection = collect($all);
+         $userinfos = $collection->sortBy('created_at');
+
          // dd($userinfos);
 
 
@@ -716,8 +672,252 @@ class ProfileController extends Controller
            $message = Message::where('sendUser_id',$request->id)->where('receivedUser_id',$id)->where('status',1)->first();
          }
 
-         // dd($message->image_path);
+         // dd("?");
          return view('admin.message.offermessage',compact('user','message'));
+       }
+
+
+       public function choiceoffer(Request $request){
+         $id = Auth::user()->id;
+         $user = User::find($id);
+         $userinfoId = $request->userinfoId;
+         // dd($_POST['approval']);
+
+         if(isset($_POST['approval'])){
+           $message = Message::where('sendUser_id',$userinfoId)->where('receivedUser_id',$id)->where('status',1)->first();
+           $message->status = 3;
+           $message->save();
+           // dd($message->status);
+       }elseif(isset($_POST['pass'])){
+           $message = Message::where('sendUser_id',$userinfoId)->where('receivedUser_id',$id)->where('status',1)->first();
+           $message->status = 0;
+           $message->save();
+           // dd($message->status);
+
+         }
+         return redirect('admin/profile/info');
+       }
+
+       public function message(){
+         $id = Auth::user()->id;
+         $user = User::find($id);
+
+         $message1 = Message::where('receivedUser_id',$id)->where('status',3)->get();
+         $num = count($message1);
+         for($i=0;$i<$num;$i++) {
+           $message1[$i] = Message::where('receivedUser_id',$id)->where('status',3)->first();
+           $mes1 = $message1[$i]->sendUser_id;
+           $userinfo1[$i] = User::where('id',$mes1)->first();
+           $userinfo1[$i]['message'] = $message1[$i]->message_content;
+         }
+         if(!isset($userinfo1)){
+           $userinfo1 = array();
+         }
+
+         // dd($userinfoId1);
+
+         $message2 = Message::where('sendUser_id',$id)->where('status',3)->get();
+         $num = count($message2);
+         for($i=0;$i<$num;$i++) {
+           $message2[$i] = Message::where('sendUser_id',$id)->where('status',3)->first();
+           $mes2 = $message2[$i]->receivedUser_id;
+           $userinfo2[$i] = User::where('id',$mes2)->first();
+           $userinfo2[$i]['message'] = $message2[$i]->message_content;
+         }
+         if(!isset($userinfo2)){
+           $userinfo2 = array();
+         }
+
+        $userinfos = array_merge($userinfo1,$userinfo2);
+        // dd($userinfos);
+
+         return view('admin.message.messagelist',compact('user','userinfos'));
+       }
+
+
+       public function talk(Request $request){
+         $id = Auth::user()->id;
+         $user = User::find($id);
+         $userinfoId = $request->id;
+         $username = $request->name;
+         Log::debug("p");
+         Log::debug($userinfoId);
+          // if(!isset($request->id)){
+          //   $serch1 = Message::where('sendUser_id',$id)->where('status',3)->orderBy()->first();
+          //   $userinfoId = $serch1['receivedUser_id'];
+          //   Log::debug($userinfoId);
+          // }
+
+         // dd($request->id);
+
+         // 受け取ったメッセージ
+         $message13 = Message::where('sendUser_id',$userinfoId)->where('receivedUser_id',$id)->where('status',3)->get();
+         $num13 = count($message13);
+         $message13 = array();
+         // dd($num13);
+
+         for($i=0;$i<$num13;$i++) {
+           $message13[$i] = Message::where('sendUser_id',$userinfoId)->where('receivedUser_id',$id)->where('status',3)->first();
+           $mes13 = $message13[$i]->sendUser_id;
+           $userinfo13[$i] = User::where('id',$mes13)->first();
+           $message13[$i]['profile_image_path'] = $userinfo13[$i]->profile_image_path;
+           $message13[$i]['send_user'] = "you";
+           // $userinfo13[$i]['message'] = $message13[$i]->message_content;
+         }
+         if(!isset($message13)){
+           $message13 = array();
+         }
+
+         // dd($message13);
+
+         $messages12 = Message::where('sendUser_id',$userinfoId)->where('receivedUser_id',$id)->where('status',2)->get();
+
+
+         if(isset($messages12)){
+           $array12 = array();
+           foreach ($messages12 as $message12 ) {
+             $mes12 = $message12->sendUser_id;
+             $userinfo12 = User::where('id',$mes12)->first();
+             $message12['profile_image_path'] = $userinfo12->profile_image_path;
+             $array12[] = $message12;
+           }
+         }
+
+           // Log::debug($array);
+
+
+
+         if(!isset($messages12)){
+           $array12 = array();
+         }
+
+
+         $receivemessage = array_merge($message13,$array12);
+         $receiveNum = count($receivemessage);
+         Log::debug($receivemessage);
+
+
+         // 送ったメッセージ
+
+         $message23 = Message::where('sendUser_id',$id)->where('receivedUser_id',$userinfoId)->where('status',3)->get();
+         $num23 = count($message23);
+         $message23 = array();
+         for($i=0;$i<$num23;$i++) {
+           $message23[$i] = Message::where('sendUser_id',$id)->where('receivedUser_id',$userinfoId)->where('status',3)->first();
+           $mes23 = $message23[$i]->sendUser_id;
+           $userinfo23[$i] = User::where('id',$mes23)->first();
+           $message23[$i]['profile_image_path'] = $user->profile_image_path;
+           $message23[$i]['send_user'] = "me";
+         }
+         if(!isset($message23)){
+           $message23 = array();
+         }
+
+         // dd($message13);
+
+         $messages22 = Message::where('sendUser_id',$id)->where('receivedUser_id',$userinfoId)->where('status',2)->get();
+         // $num22 = count($message22);
+         // $message22 = array();
+         // for($i=0;$i<$num22;$i++) {
+         //   $message22[$i] = Message::where('sendUser_id',$id)->where('receivedUser_id',$userinfoId)->where('status',2)->first();
+         //   $mes22 = $message22[$i]->sendUser_id;
+         //   $userinfo22[$i] = User::where('id',$mes22)->first();
+         //   $message22[$i]['profile_image_path'] = $user->profile_image_path;
+         //   $message22[$i]['send_user'] = "me";
+         //   Log::debug($message22[$i]['message_content']);
+         // }
+
+
+
+         if(isset($messages22)){
+           $array22 = array();
+           foreach ($messages22 as $message22 ) {
+             $mes22 = $message22->sendUser_id;
+             $userinfo22 = User::where('id',$mes22)->first();
+             $message22['profile_image_path'] = $userinfo22->profile_image_path;
+             $array22[] = $message22;
+           }
+         }
+
+           // Log::debug($array);
+
+
+
+         if(!isset($messages22)){
+           $array22 = array();
+         }
+
+         $sendmessage = array_merge($message23,$array22);
+         $sendNum = count($sendmessage);
+         Log::debug($sendNum);
+
+         $all = array_merge($receivemessage,$sendmessage);
+         $collection = collect($all);
+         $allmessage = $collection->sortBy('created_at');
+
+
+
+         // Log::debug("配列確認");
+         // Log::debug($collection);
+         // Log::debug("配列確認");
+         // Log::debug("配列確認");
+         // Log::debug($allmessage);
+         // Log::debug("配列確認");
+
+
+
+         return view('admin.message.talk',compact('user','allmessage','userinfoId','username'));
+       }
+
+       public function updateMessage(Request $request){
+         $id = Auth::user()->id;
+         $user = User::find($id);
+         // $userinfoId = $request->id;
+         Log::debug($request->file);
+
+         $messagebefore1 = Message::where('sendUser_id',$id)->where('receivedUser_id',$request['receiveUserId'])->where('status',3)->first();
+
+         $messagebefore2 = Message::where('sendUser_id',$request['receiveUserId'])->where('receivedUser_id',$id)->where('status',3)->first();
+
+         Log::debug($messagebefore1);
+
+         if(isset($messagebefore1)){
+           $messagebefore1['status'] = "2";
+           Log::debug("1");
+           Log::debug($messagebefore1);
+           $messagebefore1->save();
+         }
+
+         if(isset($messagebefore2)){
+           $messagebefore2['status'] = "2";
+           Log::debug("2");
+           $messagebefore2->save();
+         }
+
+
+         $message = new Message;
+         $message->sendUser_id = $id;
+         $message->receivedUser_id = $request['receiveUserId'];
+         $message->message_content = $request['sendText'];
+         $message->status = 3;
+         // $message['send_user'] = 'me';
+
+         if($request->file !== 'undefined' ){
+           Log::debug("成功");
+           $image = $request['file'];
+           $path = Storage::disk('s3')->putFile('/',$image,'public');
+           // $path2 = str_replace('public/', '', $path);
+           $message->image_path = Storage::disk('s3')->url($path);
+         }else{
+           $message->image_path = "";
+         }
+
+         Log::debug($message->image_path);
+
+         $message->save();
+
+         // return view('admin.message.talk',compact('user','allmessage'));
+         return true;
        }
 
 

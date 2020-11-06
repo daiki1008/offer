@@ -26,9 +26,7 @@
 
   <div class="profile-edit-area">
     <h5 class="edit_profile_text_top">プロフィールの編集</h5>
-        <textarea class="edit_profile_text" name="edit_profile_text" rows="13" cols="90">
-          {{ $user['introduction'] }}
-        </textarea>
+        <textarea class="edit_profile_text" name="edit_profile_text" rows="13" cols="90">{{ $user['introduction'] }}</textarea>
   </div>
 
   <button class="profile_update_btn">

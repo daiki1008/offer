@@ -23,21 +23,24 @@
     </div>
     @endif
 
-    @if($message['receivedUser_id'] == $user['id'])
-    <div class="approval_area">
-      <button class="offer-submit-appropval" name="approval" >
-        <p>承認する</p>
-      </buttom>
-      <button class="offer-submit-pass" name="pass" >
-        <p>見送る</p>
-      </buttom>
-    </div>
-    @endif
-    @if($message['sendUser_id'] == $user['id'])
-    <div class="attention_message">
-      <p>OFFERが承認されるまでお待ちください</p>
-    </div>
-    @endif
+    <form class="choice" action="{{  action('Admin\ProfileController@choiceoffer',['userinfoId'=>$message['sendUser_id']]) }}" method="post">
+      @csrf
+      @if($message['receivedUser_id'] == $user['id'])
+      <div class="approval_area">
+        <button class="offer-submit-appropval" name="approval" value="0">
+          <p>承認する</p>
+        </buttom>
+        <button class="offer-submit-pass" name="pass" value="1">
+          <p>見送る</p>
+        </buttom>
+      </div>
+      @endif
+      @if($message['sendUser_id'] == $user['id'])
+      <div class="attention_message">
+        <p>OFFERが承認されるまでお待ちください</p>
+      </div>
+      @endif
+    </form>
 
 </div>
 </div>

@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Route;
   Route::get('/editGallary/{id}', 'Admin\ProfileController@gallary_delete');
   Route::post('/updateGallary','Admin\ProfileController@gallaryUpdate');
   Route::post('/updateProfile','Admin\ProfileController@profileUpdate');
+  Route::post('/updateMessage','Admin\ProfileController@updateMessage');
 
 
 
@@ -41,6 +42,9 @@ Route::group(['prefix' => 'admin'],function(){
    Route::post('massage/offer','Admin\ProfileController@sendoffer')->middleware('auth');
    Route::get('massage/offerindex','Admin\ProfileController@offerlist')->middleware('auth');
    Route::get('massage/offermessage','Admin\ProfileController@offermessage')->middleware('auth');
+   Route::post('massage/offermessage','Admin\ProfileController@choiceoffer')->middleware('auth');
+   Route::get('massage/messagelist','Admin\ProfileController@message')->middleware('auth');
+   Route::get('massage/talk','Admin\ProfileController@talk')->middleware('auth');
 });
 
 
