@@ -425,11 +425,7 @@ a {
     color: #222222;
 }
 
-.job-tag-area {
-  width: 400px;
-  height: 30px;
-  clear: left;
-}
+
 
 .profile_user_name {
   font-size: 30px;
@@ -442,9 +438,14 @@ a {
   color: #444444;
   margin: 0;
 }
+.job-tag-area {
+  // height: 30px;
+  // display: inline-block;
+  clear: left;
+}
 
 .profile_job_tag {
-  width: 60px;
+  // width: 200px;
   height: 25px;
   font-size:  16px;
   color: #444444;

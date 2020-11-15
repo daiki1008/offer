@@ -368,7 +368,7 @@ a {
 
 .profile-top-area {
   width: 400px;
-  height: 70px;
+  height: 90px;
   margin-top: 108px;
   margin-left: 20px;
   padding: 0;
@@ -378,6 +378,7 @@ a {
 .user-name-area {
   width: 200px;
   height: 40px;
+  margin-bottom: 5px;
   float: left;
 }
 
@@ -426,9 +427,12 @@ a {
 }
 
 .job-tag-area {
-  width: 400px;
+  /* width: 400px; */
+  /* display: inline-block; */
+  /* vertical-align: middle; */
   height: 30px;
-  clear: left;
+  margin-top: 15px;
+  clear: both;
 }
 
 .profile_user_name {
@@ -444,13 +448,15 @@ a {
 }
 
 .profile_job_tag {
-  width: 60px;
+  /* width: auto; */
+  display: inline-block;
   height: 25px;
   font-size:  16px;
   color: #444444;
   margin-left: -1px;
   padding-left: 5px;
-  display: block;
+  padding-right: 5px;
+  /* display: block; */
   border: 1px solid #CCCCCC;
   background-color: #F0F8FF;
   box-shadow: inset 1px 2px 7px 0 rgba(0, 0, 0, 0.09);
