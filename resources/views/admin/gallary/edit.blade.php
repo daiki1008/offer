@@ -24,7 +24,7 @@
 
   </div>
 
-  <div class="profile-edit-area">
+  <div class="profile-edit-area form-group">
     <h5 class="edit_profile_text_top">プロフィールの編集</h5>
         <textarea class="edit_profile_text" name="edit_profile_text" rows="13" cols="90">{{ $user['introduction'] }}</textarea>
   </div>

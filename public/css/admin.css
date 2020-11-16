@@ -98,7 +98,7 @@ a {
   margin: 70px auto 30px;
   position: relative;
   margin-top: 0;
-  padding-top: 10px;
+  padding-top: 50px;
 }
 
 .guest_content{
@@ -111,7 +111,7 @@ a {
 }
 
 .velt{
-  width: 100%;
+  width: 1500px;
   height: 20px;
   background-color: #DDDDDD;
   position: absolute;
@@ -283,7 +283,6 @@ a {
   font-size: 13px;
   margin-top: -9px;
   height: 20px;
-  /* margin: 37px 0px 5px 8px; */
   padding-top: 0;
   font-size: 13px;
   padding: 0 3px 0;
@@ -296,6 +295,7 @@ a {
 
 .side-profile-text {
   font-size: 16px;
+  display: inline-block;
   margin-top: -9px;
   margin-bottom: 5px;;
 }
@@ -471,9 +471,11 @@ a {
 }
 
 .profile_text_head{
-  width: 900px;
+  width: 872px;
   color: #333333;
   font-weight: 300px;
+  border-bottom: 8px solid #999999;
+  border-radius: 8px;
 }
 
 .profile_text_area{
@@ -497,6 +499,7 @@ a {
   /* margin-top: 0px; */
   width: 872px;
   margin-left: 28px;
+  margin-top: 80px;
 }
 .innner-gallary-area{
   /* margin-top: 0px; */
@@ -505,6 +508,8 @@ a {
 .profile_gallary_head{
   width: 872px;
   height: 30px;
+  border-bottom: 8px solid #999999;
+  border-radius: 8px;
   /* margin-left: 15px; */
 }
 .profile_gallary_index{
@@ -518,6 +523,8 @@ a {
 
 /* EDIT PROFILE */
 .edit_profile_text{
+  padding-left: 8px;
+  padding-top: 8px;
   border: 1px solid #EEEEEE;
   border-radius: 2px;
   box-shadow: inset 1px 2px 7px 0 rgba(0, 0, 0, 0.05);
@@ -1279,6 +1286,8 @@ textarea {
 .offer_text{
   width: 650px;
   height: 400px;
+  padding-left: 8px;
+  padding-top: 8px;
   border: solid 1px #555555;
   border-radius: 5px;
 

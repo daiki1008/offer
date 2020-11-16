@@ -1,8 +1,14 @@
 @extends('layouts.admin')
 @section('title','検索')
 @section('content')
+<div class="main-container">
+<div class="favoritelist-page"><p>MESSAGE</p></div>
 
 <div class="index-table">
+ @if($userinfos == [] )
+   <div class="favoritelist-page"><p>やりとり中のMESSAGEはありません</p></div>
+   @endif
+
   @foreach($userinfos as $userinfo)
   <div class="profile-index">
       <a href="  {{ action('Admin\ProfileController@talk',['id'=> $userinfo->id,'message'=> $userinfo->message,'check'=> $userinfo->check]) }}  ">
@@ -24,5 +30,6 @@
    </div>
    @endforeach
  </div>
+</div>
 
 @endsection

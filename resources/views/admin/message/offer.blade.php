@@ -21,8 +21,7 @@
        <li>・OFFERメッセージが承認されると、メッセージのやりとりができるようになります。</li>
        <li>・OFFERしたい仕事と関係ない内容は控えてください。</li>
     </ul>
-    <textarea type="text" class="offer_text" name="offer_text">
-    </textarea>
+    <textarea type="text" class="offer_text form-group" name="offer_text"></textarea>
     <p class="tenpu">・添付ファイル</p>
     <input type="file" name="offer-image" class="offer-image">
     <button class="offer-submit" name="userinfo" value="{{ $userinfoId }}">
