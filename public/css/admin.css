@@ -271,14 +271,16 @@ a {
   margin-left: 9px;
 }
 .side-user-name{
-   margin-bottom: 7px;
+   /* margin-bottom: 7px; */
 }
 
 .side-user-name p{
   display: block;
   font-size: 19px;
 }
-
+.side-job-tag{
+  margin-top: -7px;
+}
 .side-job-tag p{
   font-size: 13px;
   margin-top: -9px;
@@ -286,7 +288,7 @@ a {
   padding-top: 0;
   font-size: 13px;
   padding: 0 3px 0;
-  display: block;
+  /* display: block; */
   border: 1px solid #CCCCCC;
   background-color: #F0F8FF;
   box-shadow: inset 1px 2px 7px 0 rgba(0, 0, 0, 0.05);
@@ -376,7 +378,7 @@ a {
 }
 
 .user-name-area {
-  width: 200px;
+  /* width: 200px; */
   height: 40px;
   margin-bottom: 5px;
   float: left;
